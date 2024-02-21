@@ -12,5 +12,5 @@ The Spring Boot Actuator is a set of production-ready features that help you mon
 
 
 [spring-boot-starter-actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)\
-[Health Indicators in Spring Boot](https://www.baeldung.com/spring-boot-health-indicators)
+[Health Indicators in Spring Boot](https://www.baeldung.com/spring-boot-health-indicators)\
 [Spring Boot Health actuator](https://springhow.com/spring-boot-health-check-indicators/)\
