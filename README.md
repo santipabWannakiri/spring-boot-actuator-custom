@@ -136,7 +136,11 @@ public class PingServiceHealthIndicator implements HealthIndicator {
     }
 }
  ```
-
+The code example above, using restTemplate to call get method to Order service, if get response back from order service will be show status `UP`, on the other hand will be `DOWN` like picutre below. (The order service must implement a health check endpoint.)
+The endpoint to access is `http://localhost:8080/actuator/health/order-service`.
+<p align="center">
+  <img src="images/actuator-ping-service.png" alt="image description" width="700" height="350">
+</p>
 
 [spring-boot-starter-actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)\
 [Health Indicators in Spring Boot](https://www.baeldung.com/spring-boot-health-indicators)\
