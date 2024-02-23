@@ -147,10 +147,24 @@ The endpoint to access is `http://localhost:8080/actuator/health/order-service`.
 </p>
 
 ## Health Groups
-The health group is that we can gourp multiple endpoint to a single endpoint and show all the result as the same time. For example the example above we have 
-* Checks for low disk space.
-* Checks that a connection to DataSource can be obtained.
-* Ping target service
+The health group is that we can group multiple endpoints into a single endpoint and show all the results at the same time. For example, in the example above, we have 3 endpoints following
+* http://localhost:8080/actuator/health/disk
+* http://localhost:8080/actuator/health/h2
+* http://localhost:8080/actuator/health/order-service
+
+We can group then into a single endpoint by configure applicaiton.properties at following \
+
+`management.endpoint.health.group.multi.include = disk,h2,order-service`
+
+`multi` is going to be an endpoint for grouping three services, so you should customize the endpoint at `multi`  to whatever you want.
+The final endpoint from the example's going to be 'http://localhost:8080/actuator/health/multi', and the result is shown in the picture below:
+
+<p align="center">
+  <img src="images/actuator-ping-service.png" alt="image description" width="600" height="300">
+</p>
+
+
+
 
 [spring-boot-starter-actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)\
 [Health Indicators in Spring Boot](https://www.baeldung.com/spring-boot-health-indicators)\
