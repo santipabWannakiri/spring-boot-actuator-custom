@@ -69,6 +69,10 @@ public class CheckDiskSpaceHealthIndicator implements HealthIndicator {
     }
 }
  ```
+In the code example above, it's going to check available disk space and compare it between threshold and free. If `threshold < free` : will return status `DOWN`. And the endpoint to access is `http://localhost:8080/actuator/health/disk`.
+<p align="center">
+  <img src="images/actuator-check-disk.png" alt="image description" width="700" height="350">
+</p>
 
 ### Checks that a connection to DataSource can be obtained.
  ```java
@@ -142,6 +146,12 @@ The endpoint to access is `http://localhost:8080/actuator/health/order-service`.
   <img src="images/actuator-ping-service.png" alt="image description" width="600" height="300">
 </p>
 
+## Health Groups
+The health group is that we can gourp multiple endpoint to a single endpoint and show all the result as the same time. For example the example above we have 
+* Checks for low disk space.
+* Checks that a connection to DataSource can be obtained.
+* Ping target service
+
 [spring-boot-starter-actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)\
 [Health Indicators in Spring Boot](https://www.baeldung.com/spring-boot-health-indicators)\
-[Spring Boot Health actuator](https://springhow.com/spring-boot-health-check-indicators/)\
+[Spring Boot Health actuator](https://springhow.com/spring-boot-health-check-indicators/)
