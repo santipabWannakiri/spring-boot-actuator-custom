@@ -20,6 +20,12 @@ and\
 
 For the lists of endpoints available, please see at -> [Actuator endpoints](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.endpoints)
 
+Once you've done the setup of the above configuration, run the application and navigate to the endpoint 'http://localhost:8080/actuator'. It's going to provide all available endpoints that you can access with configuration in the application. propertis.
+
+
+
+
+
 
 
 [spring-boot-starter-actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)\
