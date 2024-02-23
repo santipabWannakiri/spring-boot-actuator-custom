@@ -103,6 +103,39 @@ The code example above, it's going to check connection to H2 database if able to
   <img src="images/actuator-check-disk.png" alt="image description" width="700" height="350">
 </p>
 
+### Ping target service
+
+ ```java
+@Component("order-service")
+public class PingServiceHealthIndicator implements HealthIndicator {
+    private final RestTemplate restTemplate;
+    private String orderServiceEndpoint;
+
+    @Autowired
+    public PingServiceHealthIndicator(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
+    @Value("${custom.actuator.ping.order.service}")
+    public void setOrderServiceEndpoint(String orderServiceEndpoint) {
+        this.orderServiceEndpoint = orderServiceEndpoint;
+    }
+
+    @Override
+    public Health health() {
+        try {
+            String response = restTemplate.getForObject(orderServiceEndpoint, String.class);
+            if (response != null && !response.isEmpty()) {
+                return Health.up().withDetail("Service", "Order-Service").withDetail("message", response).build();
+            } else {
+                return Health.down().withDetail("Service", "Order-Service").withDetail("error", "Unable to reach out order-service").build();
+            }
+        } catch (Exception exception) {
+            return Health.down().withDetail("Service", "Order-Service").withDetail("error", exception.getMessage()).build();
+        }
+    }
+}
+ ```
 
 
 [spring-boot-starter-actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)\
