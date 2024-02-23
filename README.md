@@ -12,10 +12,11 @@ or even create custom endpoints to expose additional information that we want, d
 
 
 ## Built-in Endpoints
-The built-in endpoints are the endpoints that Spring Boot already provides for you. It's going to capture serveral aspects of information about your application for monitoring. To use built-in endpoints, it is straight-forward. You just need to define the endpoint that you want to expose in the application. propertis with the tag below.
+The built-in endpoints are the endpoints that Spring Boot already provides for you. It's going to capture serveral aspects of information about your application for monitoring. To use built-in endpoints, it is straight-forward. You just need to define the endpoint that you want to expose in the `application. propertis` with the tag below.
 
 `management.endpoints.web.exposure.include = endpointName1, endpointName2 `
 
+For the lists of endpoints available, please see at -> [Actuator endpoints](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.endpoints)
 
 
 
