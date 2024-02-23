@@ -70,6 +70,40 @@ public class CheckDiskSpaceHealthIndicator implements HealthIndicator {
 }
  ```
 
+### Checks that a connection to DataSource can be obtained.
+ ```java
+@Component("h2")
+public class DatabaseHealthIndicator implements HealthIndicator {
+
+    @Override
+    public Health health() {
+        int errorCode = check();
+        if (errorCode != 0) {
+            return Health.down().withDetail("Error code", errorCode).build();
+        }
+        return Health.up()
+                .withDetail("database", "h2")
+                .withDetail("indicatorType", "custom")
+                .build();
+    }
+
+    public int check() {
+        try (Connection connection = DriverManager.getConnection("jdbc:h2:mem:demo", "sa", "zxcv")) {
+            connection.createStatement().execute("SELECT 1");
+        } catch (SQLException exception) {
+            System.out.println(exception.toString());
+            return 1;
+        }
+        return 0;
+    }
+}
+ ```
+The code example above, it's going to check connection to H2 database if able to connect, it's going to return status `UP`. And the endpoint to access is `http://localhost:8080/actuator/health/h2`.
+<p align="center">
+  <img src="images/actuator-check-disk.png" alt="image description" width="700" height="350">
+</p>
+
+
 
 [spring-boot-starter-actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)\
 [Health Indicators in Spring Boot](https://www.baeldung.com/spring-boot-health-indicators)\
