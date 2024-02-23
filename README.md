@@ -27,7 +27,48 @@ Once you've done the setup of the above configuration, run the application and n
 </p>
 
 
+## Custom Endpoints
+To custom endpoint, it' require coding for custom meet specific requirement, So I'm going to provide 3 example custom endpoint for health checking at following 
+* Checks for low disk space.
+* Checks that a connection to DataSource can be obtained.
+* Ping target service
 
+For custom endpoint configuration, we have to declare the class as bean, and the path for access will be align with the bean name. Please look at more details in the example below.
+
+### Checks for low disk space.
+ ```java
+@Component("disk")
+public class CheckDiskSpaceHealthIndicator implements HealthIndicator {
+    private DiskSpaceHealthIndicator disk;
+    private String path;
+    private int threshold;
+
+    @Value("${custom.actuator.disk.path}")
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    @Value("${custom.actuator.disk.threshold.gb}")
+    public void setThreshold(int threshold) {
+        this.threshold = threshold;
+    }
+
+    @Override
+    public Health health() {
+        try {
+            this.disk = new DiskSpaceHealthIndicator(new File(path), DataSize.ofGigabytes(threshold));
+            Health originalHealth = disk.health();
+            if (originalHealth.getStatus().equals(Status.UP)) {
+                return Health.up().withDetail("details", originalHealth.getDetails()).build();
+            } else {
+                return Health.down().withDetail("error", originalHealth.getDetails()).build();
+            }
+        } catch (Exception e) {
+            return Health.down().withDetail("error", "Failed to check disk space").build();
+        }
+    }
+}
+ ```
 
 
 [spring-boot-starter-actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)\
