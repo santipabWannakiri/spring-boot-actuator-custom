@@ -152,20 +152,20 @@ The health group is that we can group multiple endpoints into a single endpoint 
 * http://localhost:8080/actuator/health/h2
 * http://localhost:8080/actuator/health/order-service
 
-We can group then into a single endpoint by configure applicaiton.properties at following \
+We can group then into a single endpoint by configure applicaiton.properties at following 
 
 `management.endpoint.health.group.multi.include = disk,h2,order-service`
 
-`multi` is going to be an endpoint for grouping three services, so you should customize the endpoint at `multi`  to whatever you want.
-The final endpoint from the example's going to be 'http://localhost:8080/actuator/health/multi', and the result is shown in the picture below:
+`multi` is going to be an endpoint for grouping three services, so you should customize the endpoint at `multi`  to whatever you want.\
+The final endpoint from the example's going to be `http://localhost:8080/actuator/health/multi`, and the result is shown in the picture below:
 
 <p align="center">
-  <img src="images/actuator-ping-service.png" alt="image description" width="600" height="300">
+  <img src="images/actuator-health-group.png" alt="image description" width="700" height="500">
 </p>
 
 
 
-
+Reference document:\
 [spring-boot-starter-actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)\
 [Health Indicators in Spring Boot](https://www.baeldung.com/spring-boot-health-indicators)\
 [Spring Boot Health actuator](https://springhow.com/spring-boot-health-check-indicators/)
